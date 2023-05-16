@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
 
     public float my_speed = 10;
 
-    float fire_delay= .5f;
+    float fire_delay= .2f;
     float cur_delay = 0;
+    float bullet_speed = 6;
 
     void Start()
     {
@@ -23,16 +24,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cur_delay = cur_delay* Time.deltaTime;
+        cur_delay = cur_delay + Time.deltaTime; //0.001
 
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
-        
-        if(cur_delay< fire_delay)
-        {
-            Instantiate(bullet, transform.position, transform.rotation);
-            cur_delay = 0;
-        }
+
+        Fire();
         
 
         
@@ -43,6 +40,21 @@ public class Player : MonoBehaviour
         inputVec = inputVec.normalized * my_speed *Time.deltaTime;
 
         my_rigid.MovePosition(my_rigid.position + inputVec);
+
+    }
+
+    void Fire()
+    {
+        if (cur_delay < fire_delay)
+            return;
+
+        GameObject bullet_info = Instantiate(bullet, transform.position, transform.rotation);
+        Rigidbody2D bullet_rigid = bullet_info.GetComponent<Rigidbody2D>();
+
+        bullet_rigid.AddForce(Vector2.up * bullet_speed, ForceMode2D.Impulse);
+
+        cur_delay = 0;
+
 
     }
 
