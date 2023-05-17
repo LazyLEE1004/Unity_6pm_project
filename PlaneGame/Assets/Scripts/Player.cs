@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     float cur_delay = 0;
     float bullet_speed = 6;
 
+    bool hit_leftbox=false;
+
+
     void Start()
     {
         my_rigid= GetComponent<Rigidbody2D>();
@@ -55,6 +58,31 @@ public class Player : MonoBehaviour
 
         cur_delay = 0;
 
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.transform.tag == "Boundary")
+        {
+            if (collision.transform.name=="LeftBoundary")
+            {
+                hit_leftbox = true;
+            }
+        }
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Boundary")
+        {
+            if (collision.transform.name == "LeftBoundary")
+            {
+                hit_leftbox = false;
+            }
+        }
 
     }
 

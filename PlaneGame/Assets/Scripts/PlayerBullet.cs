@@ -10,6 +10,7 @@ public class PlayerBullet : MonoBehaviour
     float destroy_timer = 6;
     float cur_timer = 0;
 
+
     
     // Start is called before the first frame update
     void Start()

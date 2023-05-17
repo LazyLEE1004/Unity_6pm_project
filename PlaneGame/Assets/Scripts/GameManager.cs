@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] spawn_pos;
     
     float cur_timer = 0;
-    float spawn_delay = 1.5f;
+    float spawn_delay = .7f;
 
    
     void Start()
