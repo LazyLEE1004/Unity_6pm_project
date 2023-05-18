@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     bool hit_topbox = false;
     bool hit_bottombox = false;
 
+    int hp=3;
 
     void Start()
     {
@@ -78,11 +79,11 @@ public class Player : MonoBehaviour
 
         if (collision.transform.tag == "Boundary")
         {
-            if (collision.transform.name=="LeftBoundary")
+            if (collision.transform.name == "LeftBoundary")
             {
                 hit_leftbox = true;
             }
-            else if(collision.transform.name == "RightBoundary")
+            else if (collision.transform.name == "RightBoundary")
             {
                 hit_rightbox = true;
             }
@@ -95,8 +96,22 @@ public class Player : MonoBehaviour
                 hit_bottombox = true;
             }
 
+
         }
-        
+        else if(collision.transform.tag == "Enemy")
+        {
+            
+            hp = hp - 1;
+
+            Destroy(collision.gameObject);
+
+            if (hp <= 0)
+            {
+                Destroy(gameObject);
+            }
+
+        }
+
         //if (collision.transform.tag == "Boundary")
         //{
         //    switch (collision.transform.name)
