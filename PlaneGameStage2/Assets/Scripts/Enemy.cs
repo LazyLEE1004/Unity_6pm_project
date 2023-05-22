@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-
     float cur_timer=0;
     float destory_timer=5;
 
     float hp = 3;
+
+    public ParticleSystem particle;
     
     void Start()
     {
         
+
     }
 
     // Update is called once per frame
@@ -37,13 +40,17 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "PlayerBullet")
         {
             hp = hp - 1;
-            
+
+            particle.Play();
             Destroy(collision.gameObject);
 
             if (hp <= 0)
             {
                 Destroy(gameObject);
+                
             }
+
+
 
         }
 

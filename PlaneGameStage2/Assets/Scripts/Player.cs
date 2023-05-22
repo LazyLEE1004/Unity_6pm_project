@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -15,12 +16,20 @@ public class Player : MonoBehaviour
     float cur_timer = 0;
     float delay_timer=.2f;
 
+    public float score;
 
-    
+
+    public Text score_text;
+    public Text score_num;
+
+
+
     void Start()
     {
         my_rigid = GetComponent<Rigidbody2D>();
-        
+        score_text.text = "SCORE";
+        score_num.text = score.ToString();
+
     }
 
     // Update is called once per frame
@@ -39,6 +48,7 @@ public class Player : MonoBehaviour
             cur_timer = 0;
         }
 
+        score_num.text = score.ToString();
 
 
     }
