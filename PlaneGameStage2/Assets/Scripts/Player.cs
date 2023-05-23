@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     float cur_timer = 0;
     float delay_timer=.2f;
 
-    public float score;
+    public float score = 0;
 
 
     public Text score_text;

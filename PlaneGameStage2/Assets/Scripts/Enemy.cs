@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
@@ -9,6 +10,9 @@ public class Enemy : MonoBehaviour
     float destory_timer=5;
 
     float hp = 3;
+
+    public GameObject playerobj;
+    public Player playercs;
 
     public ParticleSystem particle;
     
@@ -47,6 +51,8 @@ public class Enemy : MonoBehaviour
             if (hp <= 0)
             {
                 Destroy(gameObject);
+                playercs.score += 100;
+                
                 
             }
 
