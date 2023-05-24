@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
         {
             GameObject bulletobj = Instantiate(bullet, transform.position, transform.rotation);
             bullet_rigid = bulletobj.GetComponent<Rigidbody2D>();
-            bullet_rigid.AddForce(Vector2.up * 3, ForceMode2D.Impulse);
+            bullet_rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 
             cur_timer = 0;
         }

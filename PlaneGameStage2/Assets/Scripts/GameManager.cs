@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject[] spawn_pos;
+    public GameObject spawn_pos_boss;
+    public GameObject target_pos_boss;
+
+    public GameObject bossObj;
     public GameObject enemy_prf;
     public GameObject player_spawn;
 
@@ -14,8 +18,11 @@ public class GameManager : MonoBehaviour
 
     float cur_timer = 0;
     float spawn_timer = .4f;
-    
+
+    bool isbossSpawn = true;
+
     public GameObject playerobj;
+    GameObject player_info;
     Player playercs;
 
     public Text score_text;
@@ -25,7 +32,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-        GameObject player_info=Instantiate(playerobj, player_spawn.transform.position, 
+        player_info=Instantiate(playerobj, player_spawn.transform.position, 
                                             player_spawn.transform.rotation);
         playercs = player_info.GetComponent<Player>();
         playercs.score_text = score_text;
@@ -57,6 +64,24 @@ public class GameManager : MonoBehaviour
             
         }
 
+        if (playercs.score >= 100 && isbossSpawn)
+        {
+            SpawnBoss();
+
+        }
+
         
+    }
+
+    void SpawnBoss()
+    {
+        GameObject boss_info = Instantiate(bossObj, spawn_pos_boss.transform.position,
+            spawn_pos_boss.transform.rotation);
+        Boss bosscs = boss_info.GetComponent<Boss>();
+        bosscs.player = player_info;
+
+        isbossSpawn = false;
+        boss_info.transform.Rotate(Vector3.back * 180);
+
     }
 }
