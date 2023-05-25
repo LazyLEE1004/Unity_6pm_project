@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     {
         inputVec = inputVec.normalized * Time.fixedDeltaTime * speed;
 
+        
 
         my_rigid.MovePosition(my_rigid.position + inputVec);
 
