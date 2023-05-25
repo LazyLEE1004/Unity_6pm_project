@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] spawn_pos;
     public GameObject spawn_pos_boss;
     public GameObject target_pos_boss;
+    public GameObject camObj;
 
     public GameObject bossObj;
     public GameObject enemy_prf;
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
     bool isbossSpawn = true;
 
     public GameObject playerobj;
+
+    MoveCamera camcs;
     GameObject player_info;
     Player playercs;
 
@@ -37,6 +40,9 @@ public class GameManager : MonoBehaviour
         playercs = player_info.GetComponent<Player>();
         playercs.score_text = score_text;
         playercs.score_num= score_num;
+
+        camcs = camObj.GetComponent<MoveCamera>();
+        camcs.target = player_info;
 
 
     }

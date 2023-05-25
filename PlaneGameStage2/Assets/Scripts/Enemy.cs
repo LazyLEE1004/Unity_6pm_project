@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject playerobj;
     public Player playercs;
+    public GameObject particleEffect;
 
     public ParticleSystem particle;
     
@@ -47,6 +48,10 @@ public class Enemy : MonoBehaviour
 
             particle.Play();
             Destroy(collision.gameObject);
+
+            Instantiate(particleEffect, collision.transform.position,
+                collision.transform.rotation);
+
 
             if (hp <= 0)
             {
