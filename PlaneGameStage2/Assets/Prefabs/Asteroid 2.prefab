@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7189b25373ea5754099fed4a41708588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 6966727919773278177, guid: e7a321f55e1d6534892acb97f86a6612, type: 3}
   playerobj: {fileID: 0}
   playercs: {fileID: 0}
   particleEffect: {fileID: 100002, guid: 4e107e555a721bc4cbcfc179e3411bef, type: 3}

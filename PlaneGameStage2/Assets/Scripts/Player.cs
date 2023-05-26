@@ -56,14 +56,30 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         inputVec = inputVec.normalized * Time.fixedDeltaTime * speed;
+        transform.position = my_rigid.position + inputVec;
 
-        
+        float clampX = Mathf.Clamp(transform.position.x, -5, 5);
+        float clampY = Mathf.Clamp(transform.position.y, -5, 5);
 
-        my_rigid.MovePosition(my_rigid.position + inputVec);
+        transform.position= new Vector2(clampX, clampY);
+
+
+        //my_rigid.MovePosition(my_rigid.position + inputVec);
 
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Item")
+        {
+            Debug.Log("½ÇÇà");
+            Destroy(collision.gameObject);
+            score = score + 100;
 
+        }
+
+
+    }
 
 }

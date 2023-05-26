@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
 
     float hp = 3;
 
+    public GameObject item;
     public GameObject playerobj;
     public Player playercs;
     public GameObject particleEffect;
@@ -55,6 +56,15 @@ public class Enemy : MonoBehaviour
 
             if (hp <= 0)
             {
+                int randnum = Random.Range(0,10);
+
+                if (randnum > 5)
+                {
+                    Instantiate(item, collision.transform.position,
+                    collision.transform.rotation);
+                }
+
+
                 Destroy(gameObject);
                 playercs.score += 100;
                 
@@ -67,6 +77,7 @@ public class Enemy : MonoBehaviour
 
         
     }
+    
 
 
 }

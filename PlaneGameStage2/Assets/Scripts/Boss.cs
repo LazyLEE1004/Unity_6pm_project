@@ -12,6 +12,7 @@ public class Boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Invoke("BossPatten", 3);
         
     }
 
@@ -20,24 +21,6 @@ public class Boss : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, 
             new Vector3(0, 5.2f, 0), 2*Time.deltaTime);
-
-        // cur_timer += Time.deltaTime;
-        cur_timer = cur_timer + Time.deltaTime;
-
-        if (cur_timer > delay_timer)
-        {
-            GameObject bullet_info = 
-                        Instantiate(bullet, transform.position, transform.rotation);
-            Rigidbody2D bullet_rigid = bullet_info.GetComponent<Rigidbody2D>();
-
-            Vector2 bullet_dir =  player.transform.position - transform.position;
-            bullet_dir = bullet_dir.normalized;
-
-            bullet_rigid.AddForce(bullet_dir * 10, ForceMode2D.Impulse);
-
-
-            cur_timer= 0;
-        }
 
 
     }
@@ -49,6 +32,40 @@ public class Boss : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    void BossPatten()
+    {
+
+        StartCoroutine(FireCross());
+
+    }
+
+    IEnumerator FireCross()
+    {
+        for(int j=0; j<3; j++)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                GameObject bullet_info =
+                            Instantiate(bullet, transform.position, transform.rotation);
+
+                Rigidbody2D bullet_rigid = bullet_info.GetComponent<Rigidbody2D>();
+
+                Vector2 bullet_dir = player.transform.position - transform.position;
+                bullet_dir = bullet_dir.normalized;
+
+                bullet_rigid.AddForce(bullet_dir * 10, ForceMode2D.Impulse);
+
+            }
+            yield return new WaitForSeconds(.5f);
+
+        }
+
+        Invoke("BossPatten", 1);
+
+    }
+
+
 
 
 }
