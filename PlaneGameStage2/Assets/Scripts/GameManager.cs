@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject enemy_prf;
     public GameObject player_spawn;
 
+    public GameObject boss_hpbar_obj;
+    Slider boss_hp_slider;
+
     Rigidbody2D enemy_rigid;
 
     float cur_timer = 0;
@@ -27,10 +30,15 @@ public class GameManager : MonoBehaviour
     MoveCamera camcs;
     GameObject player_info;
     Player playercs;
+    
 
     public Text score_text;
     public Text score_num;
 
+    float max_hp=100;
+    float cur_hp = 100;
+
+    
 
     void Start()
     {
@@ -44,6 +52,10 @@ public class GameManager : MonoBehaviour
         camcs = camObj.GetComponent<MoveCamera>();
         camcs.target = player_info;
 
+        boss_hp_slider=boss_hpbar_obj.GetComponent<Slider>();
+
+
+
 
     }
 
@@ -56,18 +68,11 @@ public class GameManager : MonoBehaviour
 
         if (cur_timer > spawn_timer)
         {
-            int randnum = Random.Range(0,4);
-            GameObject enemy_obj = Instantiate(enemy_prf, spawn_pos[randnum].transform.position, spawn_pos[randnum].transform.rotation);
-            Enemy enemycs = enemy_obj.GetComponent<Enemy>();
-            enemycs.playerobj = playerobj;
-            enemycs.playercs = playercs;
+            SpawnEnemy();
 
-            enemy_rigid = enemy_obj.GetComponent<Rigidbody2D>();
-            enemy_rigid.AddForce(Vector2.down * 5, ForceMode2D.Impulse);
-            cur_timer = 0;
+            cur_hp = cur_hp - 1;
+            boss_hp_slider.value = cur_hp/max_hp;
 
-            //playercs.score = playercs.score + 100;
-            
         }
 
         if (playercs.score >= 100 && isbossSpawn)
@@ -88,6 +93,23 @@ public class GameManager : MonoBehaviour
 
         isbossSpawn = false;
         boss_info.transform.Rotate(Vector3.back * 180);
+
+    }
+
+    void SpawnEnemy()
+    {
+        int randnum = Random.Range(0, 4);
+        GameObject enemy_obj = Instantiate(enemy_prf, spawn_pos[randnum].transform.position, spawn_pos[randnum].transform.rotation);
+        Enemy enemycs = enemy_obj.GetComponent<Enemy>();
+        enemycs.playerobj = playerobj;
+        enemycs.playercs = playercs;
+
+        enemy_rigid = enemy_obj.GetComponent<Rigidbody2D>();
+        enemy_rigid.AddForce(Vector2.down * 5, ForceMode2D.Impulse);
+        cur_timer = 0;
+
+        //playercs.score = playercs.score + 100;
+
 
     }
 }
