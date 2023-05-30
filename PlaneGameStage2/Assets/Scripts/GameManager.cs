@@ -24,13 +24,14 @@ public class GameManager : MonoBehaviour
     float spawn_timer = .4f;
 
     bool isbossSpawn = true;
+    bool isbossInst = false;
 
     public GameObject playerobj;
 
     MoveCamera camcs;
     GameObject player_info;
     Player playercs;
-    
+    Boss bosscs;
 
     public Text score_text;
     public Text score_num;
@@ -63,7 +64,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
-
         cur_timer = cur_timer + Time.deltaTime;
 
         if (cur_timer > spawn_timer)
@@ -71,7 +71,6 @@ public class GameManager : MonoBehaviour
             SpawnEnemy();
 
             cur_hp = cur_hp - 1;
-            boss_hp_slider.value = cur_hp/max_hp;
 
         }
 
@@ -80,18 +79,32 @@ public class GameManager : MonoBehaviour
             SpawnBoss();
 
         }
+        if (isbossInst)
+        {
+            boss_hp_slider.value = bosscs.cur_bosshp / bosscs.max_bosshp;
 
+            if (bosscs.isbossDead)
+            {
+                boss_hpbar_obj.SetActive(false);
+            }
+
+        }
         
+
     }
 
     void SpawnBoss()
     {
         GameObject boss_info = Instantiate(bossObj, spawn_pos_boss.transform.position,
             spawn_pos_boss.transform.rotation);
-        Boss bosscs = boss_info.GetComponent<Boss>();
+        bosscs = boss_info.GetComponent<Boss>();
         bosscs.player = player_info;
 
         isbossSpawn = false;
+        isbossInst = true;
+
+        boss_hpbar_obj.SetActive(true);
+
         boss_info.transform.Rotate(Vector3.back * 180);
 
     }

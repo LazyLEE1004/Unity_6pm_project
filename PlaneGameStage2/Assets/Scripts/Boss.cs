@@ -16,10 +16,17 @@ public class Boss : MonoBehaviour
     float cur_timer;
     float delay_timer = 0.5f;
 
+    public float max_bosshp = 50;
+    public float cur_bosshp;
+
+    public bool isbossDead = false;
+
     int patten_select = -1;
+    
     // Start is called before the first frame update
     void Start()
     {
+        cur_bosshp = max_bosshp;
         Invoke("BossPatten", 3);
         
     }
@@ -37,7 +44,16 @@ public class Boss : MonoBehaviour
     {
         if (collision.gameObject.tag == "PlayerBullet")
         {
+            cur_bosshp = cur_bosshp - 1;
             Destroy(collision.gameObject);
+
+            if (cur_bosshp <= 0)
+            {
+                isbossDead = true;
+                Destroy(gameObject);
+                
+            }
+
         }
     }
 

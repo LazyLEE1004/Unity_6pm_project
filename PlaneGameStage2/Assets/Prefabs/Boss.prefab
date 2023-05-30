@@ -195,6 +195,8 @@ MonoBehaviour:
   barrels:
   - {fileID: 4615560427170963698}
   - {fileID: 758044089479716676}
+  max_bosshp: 50
+  cur_bosshp: 0
 --- !u!1 &4615560427170963698
 GameObject:
   m_ObjectHideFlags: 0
