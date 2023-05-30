@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     float cur_timer = 0;
     float spawn_delay = .7f;
 
+    Enemy enemycs;
+
+    public ObjectManager obj_manager; 
    
     void Start()
     {
@@ -25,12 +28,8 @@ public class GameManager : MonoBehaviour
 
         if(cur_timer> spawn_delay)
         {
-            int randnum = Random.Range(0, 4);
-            GameObject astroid_info
-                = Instantiate(astroid, spawn_pos[randnum].transform.position, spawn_pos[randnum].transform.rotation);
+            SpawnEnemy();
 
-            Rigidbody2D astroid_rigid = astroid_info.GetComponent<Rigidbody2D>();
-            astroid_rigid.AddForce(Vector2.down * 3, ForceMode2D.Impulse);
             cur_timer = 0;
 
         }
@@ -39,4 +38,22 @@ public class GameManager : MonoBehaviour
 
        
     }
+
+
+    void SpawnEnemy()
+    {
+        int randnum = Random.Range(0, 4);
+        GameObject enemy_info
+            = obj_manager.SelectObj();
+        enemy_info.transform.position = spawn_pos[randnum].transform.position;
+        enemycs = enemy_info.GetComponent<Enemy>();
+        enemycs.hp = 3;
+
+        Rigidbody2D astroid_rigid = enemy_info.GetComponent<Rigidbody2D>();
+        astroid_rigid.AddForce(Vector2.down * 3, ForceMode2D.Impulse);
+
+    }
+
+
+
 }

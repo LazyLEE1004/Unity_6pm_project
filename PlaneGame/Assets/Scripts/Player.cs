@@ -103,12 +103,8 @@ public class Player : MonoBehaviour
             
             hp = hp - 1;
 
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
 
-            if (hp <= 0)
-            {
-                Destroy(gameObject);
-            }
 
         }
 

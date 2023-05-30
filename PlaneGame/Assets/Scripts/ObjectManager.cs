@@ -24,9 +24,27 @@ public class ObjectManager : MonoBehaviour
         for(int i =0; i<enemy_arr.Length; i++)
         {
             enemy_arr[i] = Instantiate(enemy);
-            //enemy_arr[i].SetActive(false);
+            enemy_arr[i].SetActive(false);
 
         }
+
+    }
+
+    public GameObject SelectObj()
+    {
+
+        for(int i =0; i<enemy_arr.Length; i++)
+        {
+
+            if (!enemy_arr[i].activeSelf)
+            {
+                enemy_arr[i].SetActive(true);
+                return enemy_arr[i];
+            }
+
+        }
+
+        return null;
 
     }
 
