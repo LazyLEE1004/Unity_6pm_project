@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 3271967437727100163, guid: 466dc3a5f74a6a543a848ab8b5536b83, type: 3}
   playerBullet: {fileID: 498781604600472243, guid: 67d84dcc8c95e9f489804bee96acd55a, type: 3}
+  particleEffect: {fileID: 100002, guid: 7952ab8c9768db24197ccdf0df096de9, type: 3}
 --- !u!4 &402007956
 Transform:
   m_ObjectHideFlags: 0
@@ -326,7 +327,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439671993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.5, z: 0}
+  m_LocalPosition: {x: 0, y: 9.04, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1119,15 +1120,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3922aae769131f41947f5968b820f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerobj: {fileID: 0}
+  playerobj: {fileID: 6635790988328219093, guid: a98228eed4e64f04599033585693c10d, type: 3}
   astroid: {fileID: 3271967437727100163, guid: 466dc3a5f74a6a543a848ab8b5536b83, type: 3}
   spawn_pos:
   - {fileID: 1426072909}
   - {fileID: 2120632759}
   - {fileID: 286694985}
   - {fileID: 1097353831}
-  player_spawn_pos: {fileID: 6635790988328219093, guid: a98228eed4e64f04599033585693c10d, type: 3}
-  obj_manager: {fileID: 402007955}
+  player_spawn_pos: {fileID: 1201058736}
+  obj_manager_in_gm: {fileID: 402007955}
 --- !u!4 &1642584358
 Transform:
   m_ObjectHideFlags: 0

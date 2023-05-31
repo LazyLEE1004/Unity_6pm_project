@@ -66,9 +66,10 @@ public class GameManager : MonoBehaviour
         enemy_info.transform.position = spawn_pos[randnum].transform.position;
         enemycs = enemy_info.GetComponent<Enemy>();
         enemycs.hp = 3;
+        enemycs.obj_manager = obj_manager_in_gm;
 
         Rigidbody2D astroid_rigid = enemy_info.GetComponent<Rigidbody2D>();
-        astroid_rigid.AddForce(Vector2.down * 3, ForceMode2D.Impulse);
+        astroid_rigid.AddForce(Vector2.down * 7, ForceMode2D.Impulse);
 
     }
 

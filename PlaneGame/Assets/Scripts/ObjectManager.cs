@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
@@ -7,9 +8,11 @@ public class ObjectManager : MonoBehaviour
 
     public GameObject enemy;
     public GameObject playerBullet;
+    public GameObject particleEffect;
 
     GameObject[] enemy_arr;
     GameObject[] playerBullet_arr;
+    GameObject[] particleEffect_arr;
 
     GameObject[] obj_arr;
 
@@ -18,24 +21,33 @@ public class ObjectManager : MonoBehaviour
 
         enemy_arr= new GameObject[30];
         playerBullet_arr = new GameObject[32];
+        particleEffect_arr = new GameObject[32];
        
-        
         InitObj();
 
     }
 
     void InitObj()
     {
+
         for(int i =0; i<enemy_arr.Length; i++)
         {
             enemy_arr[i] = Instantiate(enemy);
             enemy_arr[i].SetActive(false);
 
         }
+
         for(int i=0; i<playerBullet_arr.Length; i++)
         {
             playerBullet_arr[i] = Instantiate(playerBullet);
             playerBullet_arr[i].SetActive(false);
+
+        }
+
+        for(int i=0; i < particleEffect_arr.Length; i++)
+        {
+            particleEffect_arr[i] = Instantiate(particleEffect);
+            particleEffect_arr[i].SetActive(false);
 
         }
 
@@ -52,6 +64,10 @@ public class ObjectManager : MonoBehaviour
 
             case "PlayerBullet":
                 obj_arr = playerBullet_arr;
+                break;
+
+            case "ParticleEffect":
+                obj_arr = particleEffect_arr;
                 break;
 
 

@@ -9,7 +9,9 @@ public class Enemy : MonoBehaviour
     float cur_timer;
     float destroy_timer=7;
 
-    public int hp = 3;
+    public int hp = 10;
+
+    public ObjectManager obj_manager;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,8 @@ public class Enemy : MonoBehaviour
         {
             hp = hp - 1;
             Debug.Log("ÃÑ¾ËÀÌ ´ê¾Ò½À´Ï´Ù.");
+            GameObject particle = obj_manager.SelectObj("ParticleEffect");
+            particle.transform.position = collision.transform.position;
 
             collision.gameObject.SetActive(false);
 

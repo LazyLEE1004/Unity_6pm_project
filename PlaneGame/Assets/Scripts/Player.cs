@@ -102,16 +102,15 @@ public class Player : MonoBehaviour
             }
 
 
+
+
         }
-        else if(collision.transform.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
+            Debug.Log("통과 실행");
             
-            hp = hp - 1;
-
-            collision.gameObject.SetActive(false);
-
-
         }
+
 
         //if (collision.transform.tag == "Boundary")
         //{
@@ -169,5 +168,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+
+
+
+    }
 
 }
