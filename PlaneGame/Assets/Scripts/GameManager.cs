@@ -4,16 +4,32 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    public GameObject playerobj;
     public GameObject astroid;
     public GameObject[] spawn_pos;
-    
+    public GameObject player_spawn_pos;
+
+    GameObject player_info;
+
     float cur_timer = 0;
     float spawn_delay = .7f;
 
     Enemy enemycs;
+    Player playercs;
 
-    public ObjectManager obj_manager; 
-   
+    public ObjectManager obj_manager_in_gm;
+
+    private void Awake()
+    {
+        player_info = Instantiate(playerobj, player_spawn_pos.transform.position,
+                        player_spawn_pos.transform.rotation);
+        playercs = player_info.GetComponent<Player>();
+        playercs.obj_manager = obj_manager_in_gm;
+
+
+    }
+
     void Start()
     {
 
@@ -43,8 +59,10 @@ public class GameManager : MonoBehaviour
     void SpawnEnemy()
     {
         int randnum = Random.Range(0, 4);
+
         GameObject enemy_info
-            = obj_manager.SelectObj();
+            = obj_manager_in_gm.SelectObj("Enemy");
+
         enemy_info.transform.position = spawn_pos[randnum].transform.position;
         enemycs = enemy_info.GetComponent<Enemy>();
         enemycs.hp = 3;

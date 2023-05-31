@@ -26,7 +26,7 @@ public class PlayerBullet : MonoBehaviour
         cur_timer = cur_timer + Time.deltaTime;
         if (cur_timer > destroy_timer)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             cur_timer = 0;
         }
 

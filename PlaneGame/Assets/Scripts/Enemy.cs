@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
             hp = hp - 1;
             Debug.Log("ÃÑ¾ËÀÌ ´ê¾Ò½À´Ï´Ù.");
 
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
 
             if (hp <= 0)
             {
