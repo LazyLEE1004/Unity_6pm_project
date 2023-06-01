@@ -9,10 +9,12 @@ public class ObjectManager : MonoBehaviour
     public GameObject enemy;
     public GameObject playerBullet;
     public GameObject particleEffect;
+    public GameObject bossBullet;
 
     GameObject[] enemy_arr;
     GameObject[] playerBullet_arr;
     GameObject[] particleEffect_arr;
+    GameObject[] bossBullet_arr;
 
     GameObject[] obj_arr;
 
@@ -22,7 +24,9 @@ public class ObjectManager : MonoBehaviour
         enemy_arr= new GameObject[30];
         playerBullet_arr = new GameObject[32];
         particleEffect_arr = new GameObject[32];
-       
+        bossBullet_arr = new GameObject[100];
+
+
         InitObj();
 
     }
@@ -51,6 +55,13 @@ public class ObjectManager : MonoBehaviour
 
         }
 
+        for(int i =0; i<bossBullet_arr.Length; i++)
+        {
+            bossBullet_arr[i]= Instantiate(bossBullet);
+            bossBullet_arr[i].SetActive(false);
+
+        }
+
     }
 
     public GameObject SelectObj(string name)
@@ -70,6 +81,9 @@ public class ObjectManager : MonoBehaviour
                 obj_arr = particleEffect_arr;
                 break;
 
+            case "BossBullet":
+                obj_arr = bossBullet_arr;
+                break;
 
         }
 
