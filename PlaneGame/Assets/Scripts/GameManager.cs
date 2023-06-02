@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject player_spawn_pos;
 
     public GameObject boss_spawn_pos;
+    public GameObject boss_hp_bar_obj;
     
 
     GameObject player_info;
@@ -20,10 +22,15 @@ public class GameManager : MonoBehaviour
     float spawn_delay = .7f;
 
     bool isBossSpawn = true;
+    bool isBossAlive = false;
 
     Enemy enemycs;
     Player playercs;
     Boss bosscs;
+    Slider boss_hp_slider;
+
+    float cur_hp = 100;
+    float max_hp = 100;
 
     public ObjectManager obj_manager_in_gm;
 
@@ -33,7 +40,10 @@ public class GameManager : MonoBehaviour
                         player_spawn_pos.transform.rotation);
         playercs = player_info.GetComponent<Player>();
         playercs.obj_manager = obj_manager_in_gm;
+        
+        boss_hp_slider = boss_hp_bar_obj.GetComponent<Slider>();
 
+        
 
     }
 
@@ -56,13 +66,23 @@ public class GameManager : MonoBehaviour
 
         }
 
+        if (isBossAlive)
+        {
+            boss_hp_slider.value = bosscs.cur_hp / bosscs.max_hp;
+        }
+
         if (cur_timer> spawn_delay)
         {
             SpawnEnemy();
 
             cur_timer = 0;
 
+            cur_hp = cur_hp - 1;
+            
+
         }
+
+        
 
 
     }
@@ -93,9 +113,10 @@ public class GameManager : MonoBehaviour
         bosscs = boss_info.GetComponent<Boss>();
 
         bosscs.obj_manger_in_bosscs = obj_manager_in_gm;
-
+        bosscs.player = player_info;
 
         isBossSpawn = false;
+        isBossAlive = true;
 
     }
 
