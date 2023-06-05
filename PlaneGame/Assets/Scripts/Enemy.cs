@@ -11,7 +11,10 @@ public class Enemy : MonoBehaviour
 
     public int hp = 10;
 
+
     public ObjectManager obj_manager;
+    public Player playercs;
+
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +52,7 @@ public class Enemy : MonoBehaviour
             if (hp <= 0)
             {
                 cur_timer = 0;
+                playercs.score = playercs.score + 100;
                 gameObject.SetActive(false);
                 
             }

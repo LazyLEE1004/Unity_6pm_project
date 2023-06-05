@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -15,20 +16,25 @@ public class Player : MonoBehaviour
 
     float fire_delay= .2f;
     float cur_delay = 0;
-    float bullet_speed = 6;
+    float bullet_speed = 10;
 
     bool hit_leftbox =false;
     bool hit_rightbox = false;
     bool hit_topbox = false;
     bool hit_bottombox = false;
 
-    int hp=3;
+    public float score = 0;
+    
+    public float max_hp=10;
+    public float cur_hp; 
 
     public ObjectManager obj_manager;
+    
 
     void Start()
     {
         my_rigid= GetComponent<Rigidbody2D>();
+        cur_hp = max_hp;
     }
 
     // Update is called once per frame
@@ -105,10 +111,18 @@ public class Player : MonoBehaviour
 
 
         }
+
         if (collision.gameObject.tag == "Enemy")
         {
-            Debug.Log("통과 실행");
+            Hit(1);
+            collision.gameObject.SetActive(false);
             
+        }
+
+        if (collision.gameObject.tag == "EnemyBullet")
+        {
+            Hit(1);
+            collision.gameObject.SetActive(false);
         }
 
 
@@ -168,12 +182,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void Hit(float dmg)
     {
-        
+        cur_hp = cur_hp - dmg;
 
-
-
+        if (cur_hp <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
 }
