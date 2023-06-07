@@ -20,8 +20,8 @@ public class Boss : MonoBehaviour
     float cur_timer=0;
     float delay_timer=0.7f;
 
-    public float max_hp=100;
-    public float cur_hp;
+    public float max_hp = 100;
+    public float cur_hp = 100;
 
     void Start()
     {
@@ -52,28 +52,32 @@ public class Boss : MonoBehaviour
 
     void Patten()
     {
-        patten_select += 1;
-
-        if (patten_select >= 2)
+        if (gameObject.activeSelf)
         {
-            patten_select = 0;
+            patten_select += 1;
+
+            if (patten_select >= 2)
+            {
+                patten_select = 0;
+            }
+
+            switch (patten_select)
+            {
+
+                case 0:
+                    StartCoroutine(FireCross());
+                    break;
+
+                case 1:
+                    StartCoroutine(FireCircle());
+                    break;
+
+
+            }
+
+
+
         }
-
-        switch (patten_select) 
-        {
-        
-            case 0:
-                StartCoroutine(FireCross());
-                break;
-
-            case 1:
-                StartCoroutine(FireCircle());
-                break;
-        
-        
-        }
-
-
 
         
     }
@@ -181,9 +185,12 @@ public class Boss : MonoBehaviour
         {
             cur_hp = cur_hp - 1;
 
+            GameObject particle_info = obj_manger_in_bosscs.SelectObj("ParticleEffect");
+            particle_info.transform.position = collision.transform.position;
+
             collision.gameObject.SetActive(false);
 
-            if (cur_hp < 0)
+            if (cur_hp <= 0)
             {
                 gameObject.SetActive(false);
             }

@@ -156,6 +156,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj_manger_in_bosscs: {fileID: 0}
   barrel: {fileID: 9197368767930035219}
+  player: {fileID: 0}
+  max_hp: 20
+  cur_hp: 20
 --- !u!1 &9197368767930035219
 GameObject:
   m_ObjectHideFlags: 0

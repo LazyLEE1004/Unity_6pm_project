@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject player_hp_bar_obj;
 
     public GameObject game_over_obj;
+    public GameObject game_win_obj;
 
 
     GameObject player_info;
@@ -35,9 +36,9 @@ public class GameManager : MonoBehaviour
     Slider player_hp_slider;
 
 
-
     public Text score_text;
     public Text game_over_text;
+    public Text game_win_text;
     
 
     float cur_hp = 100;
@@ -47,21 +48,25 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        player_info = Instantiate(playerobj, player_spawn_pos.transform.position,
-                        player_spawn_pos.transform.rotation);
-        playercs_in_gm = player_info.GetComponent<Player>();
-        playercs_in_gm.obj_manager = obj_manager_in_gm;
-        
-        boss_hp_slider = boss_hp_bar_obj.GetComponent<Slider>();
 
-        player_hp_slider = player_hp_bar_obj.GetComponent<Slider>();
-
-        
-
+       
     }
 
     void Start()
     {
+
+        Time.timeScale = 1;
+
+        player_info = Instantiate(playerobj, player_spawn_pos.transform.position,
+                player_spawn_pos.transform.rotation);
+        playercs_in_gm = player_info.GetComponent<Player>();
+        playercs_in_gm.obj_manager = obj_manager_in_gm;
+
+        boss_hp_slider = boss_hp_bar_obj.GetComponent<Slider>();
+
+        player_hp_slider = player_hp_bar_obj.GetComponent<Slider>();
+
+
 
 
     }
@@ -92,6 +97,7 @@ public class GameManager : MonoBehaviour
         }
 
 
+
     }
 
     private void LateUpdate()
@@ -110,6 +116,20 @@ public class GameManager : MonoBehaviour
         {
             game_over_obj.SetActive(true);
             game_over_text.text = "!!!! Game Over !!!!!";
+        }
+
+        if (isBossAlive)
+        {
+            if (bosscs.cur_hp <= 0)
+            {
+                game_win_obj.SetActive(true);
+                game_win_text.text = "!!!!!! YOU WIN !!!!!!";
+
+
+                isBossAlive = false;
+                Invoke("StopTime", 1);
+            }
+
         }
 
     }
@@ -147,11 +167,20 @@ public class GameManager : MonoBehaviour
 
     }
 
-
     public void ReStart()
     {
+        SceneManager.LoadScene("Stage1");
+        //SceneManager.LoadScene(0);
+    }
+    public void GoMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+    
 
-        SceneManager.LoadScene(0);
+    void StopTime()
+    {
+        Time.timeScale = 0;
     }
 
 }
