@@ -9,6 +9,8 @@ public class PlayerChild : MonoBehaviour
     public Vector2 size;
 
     BoxCollider2D box;
+
+    public Player playercs;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,13 +42,25 @@ public class PlayerChild : MonoBehaviour
 
         if (collision.transform.tag == "Enemy")
         {
-
-            Debug.Log("chile ¸Â´Ù");
+            playercs.enemy_arr.Add(collision.gameObject);
+                        
         }
 
-
+   
 
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+        if (collision.transform.tag == "Enemy")
+        {
+            playercs.enemy_arr.Remove(collision.gameObject);
+
+        }
+        
+
+
+    }
 
 }
